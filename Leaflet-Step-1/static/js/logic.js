@@ -51,3 +51,8 @@ function getColor(depth) {
 
 d3.json(queryURL, function(data) {
             console.log(data)
+
+            geojson = L.geoJson(data, {
+                        pointToLayer: function(feature, latlng) {
+                            return L.circleMarker(latlng);
+                        },
