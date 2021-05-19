@@ -48,3 +48,6 @@ function getColor(depth) {
             return "blue";
     }
 }
+
+d3.json(queryURL, function(data) {
+            console.log(data)
