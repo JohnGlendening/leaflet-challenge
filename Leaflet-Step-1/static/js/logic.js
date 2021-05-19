@@ -31,3 +31,20 @@ function getRadius(magnitude) {
     }
     return magnitude * 4;
 }
+
+function getColor(depth) {
+    switch (true) {
+        case depth > 90:
+            return "red";
+        case depth > 70:
+            return "orange";
+        case depth > 50:
+            return "yellow";
+        case depth > 30:
+            return "green";
+        case depth > 10:
+            return "cyan";
+        default:
+            return "blue";
+    }
+}
