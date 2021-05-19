@@ -50,35 +50,38 @@ function getColor(depth) {
 }
 
 d3.json(queryURL, function(data) {
-            console.log(data)
+    console.log(data)
 
-            geojson = L.geoJson(data, {
-                pointToLayer: function(feature, latlng) {
-                    return L.circleMarker(latlng);
-                },
-                style: styleInfo,
-                onEachFeature: function(feature, layer) {
-                    layer.bindPopup(
-                        "Magnitude: " +
-                        feature.properties.mag +
-                        "<br>Depth: " +
-                        feature.geometry.coordinates[2] +
-                        "<br>Location: " +
-                        feature.properties.place
-                    );
-                }
-            }).addTo(myMap);
+    geojson = L.geoJson(data, {
+        pointToLayer: function(feature, latlng) {
+            return L.circleMarker(latlng);
+        },
+        style: styleInfo,
+        onEachFeature: function(feature, layer) {
+            layer.bindPopup(
+                "Magnitude: " +
+                feature.properties.mag +
+                "<br>Depth: " +
+                feature.geometry.coordinates[2] +
+                "<br>Location: " +
+                feature.properties.place
+            );
+        }
+    }).addTo(myMap);
 
-            var legend = L.control({ position: "bottomright" });
-            legend.onAdd = function() {
+    var legend = L.control({ position: "bottomright" });
+    legend.onAdd = function() {
 
-                var div = L.DomUtil.create("div", "info legend");
-                var depth = [0, 10, 30, 50, 70, 90];
+        var div = L.DomUtil.create("div", "info legend");
+        var depth = [0, 10, 30, 50, 70, 90];
 
-                for (var i = 0; i < depth.length; i++) {
-                    div.innerHTML +=
-                        '<i style = "background:' + getColor(depth[i] + 1) + '"></i> ' +
-                        depth[i] + (depth[i + 1] ? '&ndash;' + depth[i + 1] + '<br>' : '+');
-                }
-                return div;
-            };
+        for (var i = 0; i < depth.length; i++) {
+            div.innerHTML +=
+                '<i style = "background:' + getColor(depth[i] + 1) + '"></i> ' +
+                depth[i] + (depth[i + 1] ? '&ndash;' + depth[i + 1] + '<br>' : '+');
+        }
+        return div;
+    };
+
+    legend.addTo(myMap);
+});
