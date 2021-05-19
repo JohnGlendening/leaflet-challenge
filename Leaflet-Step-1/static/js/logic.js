@@ -53,6 +53,18 @@ d3.json(queryURL, function(data) {
             console.log(data)
 
             geojson = L.geoJson(data, {
-                        pointToLayer: function(feature, latlng) {
-                            return L.circleMarker(latlng);
-                        },
+                pointToLayer: function(feature, latlng) {
+                    return L.circleMarker(latlng);
+                },
+                style: styleInfo,
+                onEachFeature: function(feature, layer) {
+                    layer.bindPopup(
+                        "Magnitude: " +
+                        feature.properties.mag +
+                        "<br>Depth: " +
+                        feature.geometry.coordinates[2] +
+                        "<br>Location: " +
+                        feature.properties.place
+                    );
+                }
+            }).addTo(myMap);
