@@ -12,3 +12,15 @@ L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?acce
 
 var queryURL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson";
 var geojson;
+
+function styleInfo(feature) {
+    return {
+        opacity: 1,
+        fillOpacity: 1,
+        fillColor: getColor(feature.geometry.coordinates[2]),
+        color: "#000000",
+        radius: getRadius(feature.properties.mag),
+        stroke: true,
+        weight: 0.5
+    };
+}
